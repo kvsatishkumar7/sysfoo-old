@@ -2,7 +2,7 @@ name: sysfoo-ci-pipeline
 on: 
   push:
     branches:
-         -11-create-a-ci-pipeline-for-sysfoo
+         -master
 
 jobs: 
   build-sysfoo:
