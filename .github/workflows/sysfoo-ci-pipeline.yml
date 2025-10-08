@@ -1,28 +1,29 @@
 name: sysfoo-ci-pipeline
 on: 
   push:
-branches:
-      -master
+    branches:
+         -11-create-a-ci-pipeline-for-sysfoo
 
 jobs: 
   build-sysfoo:
      runs-on: ubuntu-latest
   
-  steps:
-     - name: Code checkout or code clone
-       uses: actions/checkout@v5
+     steps:
+        - name: Code checkout or code clone
+          uses: actions/checkout@v5
 
-     - name: Run mvn test
-       uses: mvn test
+        - name: Run mvn test
+          run: mvn test
         
-     - name: Run mvn clean & package
-       run: mvn clean package
+        - name: Run mvn clean & package
+          run: mvn clean package
         
-     - name: Run ls command
-       run: ls -lrt
+        - name: Run ls command
+          run: ls -lrt
         
-     - name: Upload artifact
-       run: actions/upload-artifact@v4
-       with:
-          name: sysfoo
-          path: target/sysfoo.war
+        - name: Upload artifact
+          uses: actions/upload-artifact@v4
+          with:
+             name: sysfoo
+             path: target/sysfoo.war
+
