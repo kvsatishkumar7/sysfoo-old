@@ -6,7 +6,7 @@ jobs:
      runs-on: ubuntu-latest
      permissions:
             contents: read
-            packages: Write
+            packages: write
   
      steps:
         - name: Code checkout or code clone
