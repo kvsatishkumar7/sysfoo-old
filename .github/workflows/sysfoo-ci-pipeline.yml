@@ -4,6 +4,9 @@ on: push
 jobs: 
    build-sysfoo:
      runs-on: ubuntu-latest
+     permissions:
+            contents: read
+            packages: Write
   
      steps:
         - name: Code checkout or code clone
@@ -23,4 +26,14 @@ jobs:
           with:
              name: sysfoo
              path: target/sysfoo.war
+
+        - uses: actions/setup-java@v4
+          with:
+             java-version: '11'
+             distribution: 'temurin'
+
+        - name: Publish package
+          run: mvn --batch-mode deploy
+          env:
+             GITHUB_TOKEN: ${{ secrets. GITHUB_TOKEN }}
 
