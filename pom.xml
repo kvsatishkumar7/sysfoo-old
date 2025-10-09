@@ -23,4 +23,12 @@
   <build>
     <finalName>sysfoo</finalName>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>Github Packages</name>
+      <url>https://maven.pkg.github.com/kvsatishkumar7/sysfoo-old</url>
+    </repository>
+  </distributionManagement>
 </project>
+
