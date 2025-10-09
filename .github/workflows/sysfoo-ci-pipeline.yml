@@ -1,11 +1,8 @@
 name: sysfoo-ci-pipeline
-on: 
-  push:
-    branches:
-         -11-create-a-ci-pipeline-for-sysfoo
+on: push
 
 jobs: 
-  build-sysfoo:
+   build-sysfoo:
      runs-on: ubuntu-latest
   
      steps:
