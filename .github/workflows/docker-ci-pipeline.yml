@@ -12,11 +12,11 @@ jobs:
         - name: Docker Login
           uses: docker/login-action@v3
           with:
-            username: ${{ vars.kvsatishkumar7 }}
-            password: ${{ secrets.Pandu@123 }}
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
         
         - name: Docker Build
-          run: docker build -t ${{ secrets.kvsatishkumar7 }}/sysfoo:v1
+          run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysfoo:v1
         
         - name: Docker push
-          run: docker push ${{ secrets.kvsatishkumar7 }}/sysfoo:v1
+          run: docker push ${{ secrets.DOCKER_USERNAME }}/sysfoo:v1
