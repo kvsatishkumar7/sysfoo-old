@@ -8,6 +8,13 @@ jobs:
      steps:
         - name: Code checkout or code clone
           uses: actions/checkout@v5
+          with:
+             fetch-depth: 0
+
+        - name: Git leaks Secret Scanning
+          uses: gitleaks/gitleaks-action@v2
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Run mvn test
           run: mvn test
