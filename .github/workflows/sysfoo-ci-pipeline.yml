@@ -25,19 +25,19 @@ jobs:
         - name: Run mvn clean & package
           run: mvn clean package
 
-        - name: SAST scan - Sonarcloud scan
-          uses: SonarSource/sonarqube-scan-action@v5.0.0
+        - name: SAST scan - SonarCloud Scan
+          uses: SonarSource/sonarcloud-github-action@v2
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           with:
             args: >
               -Dsonar.organization=kvsatishkumar7
               -Dsonar.projectKey=kvsatishkumar7_sysfoo-old
-              -Dsonar.language=java
+              -Dsonar.host.url=https://sonarcloud.io
               -Dsonar.sources=.
               -Dsonar.java.binaries=target/classes
               -Dsonar.verbose=true
-        
+
         - name: Run ls command
           run: ls -lrt
         
