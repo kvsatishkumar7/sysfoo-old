@@ -34,7 +34,6 @@ jobs:
           with:
             args: >
               -Dsonar.organization=kvsatishkumar7
-              "-Dsonar.projectName=sysfoo-12"
               -Dsonar.projectKey=kvsatishkumar7_sysfoo-old
               -Dsonar.language=java
               -Dsonar.sources=.
