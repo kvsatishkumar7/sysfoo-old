@@ -1,7 +1,5 @@
 name: sysfoo-ci-pipeline
 on: push
-branches:
-    -sysfoo-12 
 
 jobs: 
   build-sysfoo:
