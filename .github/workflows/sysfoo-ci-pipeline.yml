@@ -27,8 +27,6 @@ jobs:
 
         - name: SAST scan - Sonarcloud scan
           uses: SonarSource/sonarqube-scan-action@v6.0.0
-          with:
-            projectBaseDir: app/src
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           with:
