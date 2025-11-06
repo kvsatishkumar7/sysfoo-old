@@ -25,6 +25,11 @@ jobs:
         - name: Run mvn clean & package
           run: mvn clean package
 
+        - name: Run Snyk to check for vulnerabilities
+          uses: snyk/actions/maven@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
         - name: SAST scan - SonarCloud Scan
           uses: SonarSource/sonarcloud-github-action@v2
           env:
