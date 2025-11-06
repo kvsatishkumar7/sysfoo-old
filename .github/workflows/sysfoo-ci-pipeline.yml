@@ -26,12 +26,15 @@ jobs:
           run: mvn clean package
 
         - name: SAST scan - Sonarcloud scan
-          uses: sonarsource/sonarqube-github-action@v6.0.0
+          uses: SonarSource/sonarqube-scan-action@v6.0.0
+          with:
+            projectBaseDir: app/src
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           with:
             args: >
               -Dsonar.organization=kvsatishkumar7
+              "-Dsonar.projectName=sysfoo-12"
               -Dsonar.projectKey=kvsatishkumar7_sysfoo-old
               -Dsonar.language=java
               -Dsonar.sources=.
