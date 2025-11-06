@@ -1,0 +1,62 @@
+name: sysfoo-ci-pipeline
+on: push
+branches:
+    -sysfoo-12 
+
+jobs: 
+  build-sysfoo:
+     runs-on: ubuntu-latest
+  
+     steps:
+        - name: Code checkout or code clone
+          uses: actions/checkout@v5
+          with:
+             fetch-depth: 0
+
+        #Git leaks Secret Scanning
+        - name: Git leaks Secret Scanning
+          uses: gitleaks/gitleaks-action@v2
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Run mvn test
+          run: mvn test
+        
+        - name: Run mvn clean & package
+          run: mvn clean package
+        
+        - name: Run ls command
+          run: ls -lrt
+        
+        - name: Upload artifact
+          uses: actions/upload-artifact@v4
+          with:
+             name: sysfoo
+             path: target/sysfoo.war
+
+        - name: Docker Login
+          uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+        
+        - name: Docker Build
+          run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sysfoo:v1 .
+
+        # Trivy Image scanning
+        - name: Run Trivy vulnerability scanner
+          uses: aquasecurity/trivy-action@0.28.0
+          with:
+            image-ref: '${{ secrets.DOCKER_USERNAME }}/sysfoo:v1'
+            format: 'sarif'
+            exit-code: '0'
+            ignore-unfixed: true
+            output: 'trivy-results.sarif'
+            
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v3
+          with:
+            sarif_file: 'trivy-results.sarif'
+        
+        - name: Docker push
+          run: docker push ${{ secrets.DOCKER_USERNAME }}/sysfoo:v1
