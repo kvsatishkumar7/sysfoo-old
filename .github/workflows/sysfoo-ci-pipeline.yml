@@ -78,3 +78,8 @@ jobs:
         
         - name: Docker push
           run: docker push ${{ secrets.DOCKER_USERNAME }}/sysfoo:v1
+
+        - name: ZAP scan
+          uses: zaproxy/action-full-scan@v0.12.0
+          with:
+            target: 'https://ginandjuice.shop/'
