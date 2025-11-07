@@ -109,6 +109,6 @@ jobs:
       - name: Test service URLs
         run: |
           minikube service list
-          URL=$(minikube service sysfoo-service --url)
-          echo "------------------- Opening the service ---------------------"
-          curl $URL (minikube service sysfoo-service --url)
+          minikube service sysfoo-service --url
+          echo -n "------------------- Opening the service ---------------------"
+          curl $ (minikube service sysfoo-service --url)
