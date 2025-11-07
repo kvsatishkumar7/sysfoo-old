@@ -14,7 +14,7 @@ spec:
       labels:
         app: sysfoo
     spec:
-      container:
+      containers:
       - name: sysfoo
         image: kvsatishkumar7/sysfoo:v1
         ports:
