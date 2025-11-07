@@ -111,4 +111,4 @@ jobs:
           minikube service list
           minikube service sysfoo-service --url
           echo -n "------------------- Opening the service ---------------------"
-          curl $ (minikube service sysfoo-service --url)
+          curl $(minikube service sysfoo-service --url)
